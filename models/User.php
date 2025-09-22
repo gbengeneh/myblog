@@ -1,24 +1,22 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
-class User
-{
+class User {
     private $conn;
-    private $table_name = 'users';
+    private $table_name = "users";
+
     public $id;
     public $username;
     public $email;
     public $password_hash;
     public $created_at;
 
-    public function __construct()
-    {
+    public function __construct() {
         $database = new Database();
         $this->conn = $database->getConnection();
     }
 
-    public function create()
-    {
+    public function create() {
         $query = "INSERT INTO " . $this->table_name . " SET username=:username, email=:email, password_hash=:password_hash, created_at=NOW()";
         $stmt = $this->conn->prepare($query);
 
@@ -26,14 +24,14 @@ class User
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":password_hash", $this->password_hash);
 
-         if ($stmt->execute()) {
+        if ($stmt->execute()) {
             $this->id = $this->conn->lastInsertId();
             return true;
         }
         return false;
     }
-    // check if email already exist 
-     public function emailExists() {
+
+    public function emailExists() {
         $query = "SELECT id, username, password_hash FROM " . $this->table_name . " WHERE email = ? LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->email);
