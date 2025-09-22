@@ -10,6 +10,6 @@ define('JWT_EXPIRATION_TIME', 3600); // 1 hour
 define('UPLOAD_DIR', __DIR__ . '/../uploads/');
 
 // Base URL for accessing uploaded images
-define('BASE_URL', 'http://localhost/phpclass/blog/uploads/');
+define('BASE_URL', 'http://localhost/phpclass/myblogapp/uploads/');
 
 ?>
